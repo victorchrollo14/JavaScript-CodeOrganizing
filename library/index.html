@@ -10,25 +10,39 @@
     <div class="main">
       <header class="header">
         <h1>Library</h1>
+        <button class="login">login</button>
       </header>
-      <button class="new-book">+ Add Book</button>
+      <button class="new-book btn">+ Add Book</button>
+      <form action="" class="hidden form scale-up-center">
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="title"
+          required
+        />
+        <input
+          type="text"
+          name="author"
+          id="author"
+          placeholder="author"
+          required
+        />
+        <input
+          type="text"
+          name="pages"
+          id="pages"
+          placeholder="Pages"
+          required
+        />
+        <div class="read-section">
+          <label class="check">Have you read it?</label>
+          <input type="checkbox" name="read-status" id="read-status" />
+        </div>
+        <input type="submit" value="Submit" />
+      </form>
     </div>
-    <form action="" class="hidden form scale-up-center">
-      <input type="text" name="title" id="title" placeholder="title" required />
-      <input
-        type="text"
-        name="author"
-        id="author"
-        placeholder="author"
-        required
-      />
-      <input type="text" name="pages" id="pages" placeholder="Pages" required />
-      <div class="read-section">
-        <label class="check">Have you read it?</label>
-        <input type="checkbox" name="read-status" id="read-status" />
-      </div>
-      <input type="submit" value="Submit" />
-    </form>
+
     <script src="lib.js"></script>
   </body>
 </html>

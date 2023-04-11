@@ -14,14 +14,13 @@ function addBookToLibrary() {
 
 
 function showForm(e){
-    form.style.display = "flex";
-    main.classList.add("blur");
+    form.style.transform = "scale(1)";
 }
 
 function hideForm(e){
-    if (e.target !== newBookBtn){
-        form.style.display = "none";
-        main.classList.remove("blur");
+    if (e.target !== newBookBtn && e.target !== form && e.target.parentElement !== form && e.target.parentElement.parentElement !== form){
+        console.log(e.target.parentElement);
+        form.style.transform = "scale(0)";
     }
     
     
