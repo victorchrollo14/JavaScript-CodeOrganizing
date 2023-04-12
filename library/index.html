@@ -13,34 +13,45 @@
         <button class="login">login</button>
       </header>
       <button class="new-book btn">+ Add Book</button>
-      <form action="" class="hidden form scale-up-center">
-        <input
-          type="text"
-          name="title"
-          id="title"
-          placeholder="title"
-          required
-        />
-        <input
-          type="text"
-          name="author"
-          id="author"
-          placeholder="author"
-          required
-        />
-        <input
-          type="text"
-          name="pages"
-          id="pages"
-          placeholder="Pages"
-          required
-        />
-        <div class="read-section">
-          <label class="check">Have you read it?</label>
-          <input type="checkbox" name="read-status" id="read-status" />
-        </div>
-        <input type="submit" value="Submit" />
-      </form>
+      <section class="books-form">
+        <form action="" class="form scale-up-center">
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="title"
+            required
+          />
+          <input
+            type="text"
+            name="author"
+            id="author"
+            placeholder="author"
+            required
+          />
+          <input
+            type="text"
+            name="pages"
+            id="pages"
+            placeholder="Pages"
+            required
+          />
+          <div class="read-section">
+            <label class="check">Have you read it?</label>
+            <input type="checkbox" name="read-status" id="read-status" />
+          </div>
+          <input type="submit" value="Submit" />
+        </form>
+        <section class="book-list">
+          <section class="book">
+            <h1 class="title">"Rudest Book Ever"</h1>
+            <h1 class="author">Swetabh gangwar</h1>
+            <h2 class="no-pages">136 pages</h2>
+            <button class="read-unread read-btn">Read</button>
+            <button class="remove rm-btn">Remove</button>
+          </section>
+        </section>
+      </section>
     </div>
 
     <script src="lib.js"></script>

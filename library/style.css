@@ -36,6 +36,7 @@ body {
     background: var(--lightest-navy);
     font-family: var(--font-mono);
     margin: 0;
+    box-sizing: border-box;
 }
 
 .header {
@@ -45,7 +46,6 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 30px;
     color: var(--white);
     margin: 0 0 30px 0;
 
@@ -104,18 +104,7 @@ body {
 
 } */
 
-.form {
-    display: flex;
-    flex-direction: column;
-    width: 280px;
-    gap: 10px;
-    background: var(--light-navy);
-    padding: 30px;
-    margin: 30px 0;
-    transform: scale(0);
-    transition: transform 0.5s ease-in-out;
 
-}
 
 
 input {
@@ -190,6 +179,85 @@ input[type="submit"]:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.book-list {
+    z-index: 1;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.book {
+    width: 300px;
+    box-sizing: border-box;
+    padding: 20px;
+    background: var(--Navy);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.book h1 {
+    color: var(--white);
+    margin: 0;
+    font-size: var(--fz-lg);
+    font-weight: var(--fw-regular);
+}
+
+.rm-btn,
+.read-btn {
+    height: 40px;
+    width: 250px;
+    background: var(--green);
+    color: var(--Navy);
+    font-weight: var(--fw-semi-bold);
+    border-radius: 4px;
+    border: 0;
+}
+
+.rm-btn {
+    background-color: var(--light-slate);
+    color: var(--Navy);
+}
+
+.rm-btn:hover {
+    background-color: var(--lightest-navy);
+    color: var(--white);
+}
+
+.books-form {
+    position: relative;
+    width: 100%;
+    margin: 0 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.form {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    gap: 10px;
+    background: var(--light-navy);
+    padding: 30px;
+    margin: 30px auto;
+    transform: scale(0);
+    transition: transform 0.5s ease-in-out;
+
 }
 
 
