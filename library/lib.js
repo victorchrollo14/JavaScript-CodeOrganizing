@@ -1,44 +1,118 @@
 let myLibrary = [];
+let readButtons = [];
+let removeButtons = [];
 
 const newBookBtn = document.querySelector(".new-book");
 const form = document.querySelector(".form");
 const main = document.querySelector(".main");
 const bookList = document.querySelector(".book-list");
 const bookCard = document.querySelector('.book');
+let objId = 0;
 
 function showForm(e){
   form.style.transform = "scale(1)";
 }
+
 
 function hideForm(e){
   if (e.target !== newBookBtn && e.target !== form && e.target.parentElement !== form && e.target.parentElement.parentElement !== form){
       form.style.transform = "scale(0)";
   }
   
-  
 }
 
-function Book(title, author, pages, isRead) {
-  // the constructor...
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
+
+const getData = (e) =>{
+  // prevent submit
+  e.preventDefault();
+  
+  let title, author, pages, readStatus = false, isRead;
+  let userForm = document.querySelector('form');
+  let data = new FormData(userForm);
+
+  title = data.get("title");
+  author = data.get("author");
+  pages = data.get("pages");
+  isRead = data.get("read-status");
+  if(isRead === "on"){
+      readStatus = true;
+  }
+
+  let newBook = new Books(objId, title, author, pages, readStatus);
+  addBookToLibrary(newBook);
+
+  form.style.transform = "scale(0)";
+  userForm.reset();
+  objId++;
 }
+
+
+const changeReadStatus = (e) =>{
+    let parent = e.target.parentElement;
+    let bookId = parent.getAttribute("data-id");
+
+    for(let obj of myLibrary){
+       if(obj.id === Number(bookId)){
+          if (obj.isRead === true){
+              obj.isRead = false;
+              console.log(obj);
+              break;
+          }
+          obj.isRead = true;
+
+       }
+    }
+
+    display(myLibrary);   
+}
+
+const deleteBook = (e) => {
+    let parent = e.target.parentElement;
+    let bookId = parent.getAttribute("data-id");
+
+    for(let obj of myLibrary){
+        if(obj.id === Number(bookId)){
+           myLibrary.splice(obj.id, 1); 
+           myLibrary.forEach((ob, i) =>{
+                console.log(i);
+                ob.id = i;
+           } )
+        }
+    }
+    console.log(myLibrary);
+    display(myLibrary);
+
+}
+
+
+class Books {
+    constructor(id, title, author, pages, isRead) {
+      // the constructor...
+      this.id = id;
+      this.title = title;
+      this.author = author;
+      this.pages = pages;
+      this.isRead = isRead;
+    }
+}
+
 
 function addBookToLibrary(book) {
-  // do stuff here
-  myLibrary.push(book);
-  display(myLibrary);
+    // do stuff here
+    myLibrary.push(book);
+    display(myLibrary);
 }
+
 
 function display(Library){
     let bookSection, bkName, bkAuthor, bkPages, readBtn, removeBtn;
-    
+    let id = 0;
+
     // removing all the old data
     while (bookList.firstChild) {
       bookList.removeChild(bookList.firstChild);
     }
+
 
     // Adding new Data
     for (let book of Library){
@@ -51,6 +125,7 @@ function display(Library){
 
         // adding classnames
         bookSection.classList.add("book");
+        bookSection.setAttribute("data-id", id);
         bkName.classList.add("title");
         bkAuthor.classList.add("author");
         bkPages.classList.add("no-pages");
@@ -66,7 +141,7 @@ function display(Library){
           readBtn.textContent = "Read";
         }
         else {
-          readBtn.textContent = "Unread";
+          readBtn.textContent = "UnRead";
         }
 
         // appending Childnodes
@@ -76,19 +151,36 @@ function display(Library){
         bookSection.appendChild(readBtn);
         bookSection.appendChild(removeBtn);
         bookList.appendChild(bookSection);  
+
+        // pushing the buttons of newly created books into a list 
+        // and adding eventListeners to the buttons
+        readButtons.push(readBtn);
+        readButtons.forEach((readBtn) => {
+          readBtn.addEventListener("click", changeReadStatus);
+        })
+
+        removeButtons.push(removeBtn);
+        removeButtons.forEach((removeBtn) => {
+          removeBtn.addEventListener("click", deleteBook);
+        })
+        id++;
+
     }
 
 }
 
 
+// main execution
 newBookBtn.addEventListener("click", showForm);
 main.addEventListener("click", hideForm);
 
-const book1 = new Book("Rudest Book Ever", "sweatabh", 131, true);
-const book2 = new Book("Behave", "Robert Sapalowsky", 1200, false);
 
-addBookToLibrary(book1);
-addBookToLibrary(book2);
+document.addEventListener('submit', getData)
+
+
+
+
+
 
 
 

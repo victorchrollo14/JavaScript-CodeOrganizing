@@ -230,7 +230,7 @@ input[type="submit"]:hover {
 }
 
 .form {
-    z-index: 5;
+    z-index: 2;
     position: absolute;
     top: 0;
     left: 0;
