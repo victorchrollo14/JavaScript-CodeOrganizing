@@ -55,14 +55,12 @@ const changeReadStatus = (e) =>{
        if(obj.id === Number(bookId)){
           if (obj.isRead === true){
               obj.isRead = false;
-              console.log(obj);
               break;
           }
           obj.isRead = true;
 
        }
     }
-
     display(myLibrary);   
 }
 
@@ -79,7 +77,6 @@ const deleteBook = (e) => {
            } )
         }
     }
-    console.log(myLibrary);
     display(myLibrary);
 
 }
@@ -112,6 +109,8 @@ function display(Library){
     while (bookList.firstChild) {
       bookList.removeChild(bookList.firstChild);
     }
+    removeButtons = [];
+    readButtons = [];
 
 
     // Adding new Data
@@ -159,7 +158,14 @@ function display(Library){
           readBtn.addEventListener("click", changeReadStatus);
         })
 
+        if(removeButtons.includes(removeBtn)){
+            console.log("is present");
+            return;
+            
+        }
         removeButtons.push(removeBtn);
+        console.log(removeButtons);
+
         removeButtons.forEach((removeBtn) => {
           removeBtn.addEventListener("click", deleteBook);
         })
