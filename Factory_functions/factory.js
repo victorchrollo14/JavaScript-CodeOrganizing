@@ -128,31 +128,9 @@ console.log(naruto.clan());
 console.log(sasuke.clan());
 
 
-// composition vs inheritance
-// Inheritance - when you design your objects around what they are;
-// for example:
-
-/*  
-    Dog
-       .bark()
-    Cat
-        .meow()
-    
-    
-    
-*/
 
 
-// Composition - When you desing your objects around what they do
-// for example
-/* 
-    dog = pooper + barker
-    Cat = pooper + meower
-    cleaningRobot = driver + cleaner
-    murderRobot = driver + murderer
-    murderRobotDog = murderer + driver + barker
 
-*/
 
 
 
