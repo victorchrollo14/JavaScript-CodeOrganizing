@@ -12,6 +12,32 @@ let gameOver, draw;
 
 
 
+// music module;
+const Music = (() => {
+    const gameOver = new Audio("Music/gameover.mp3");
+    const commonMusic =  new Audio("Music/music.mp3");
+    const ting = new Audio("Music/ting.mp3");
+    
+    const PlayGameOver = () => {
+        gameOver.play();
+    }
+
+    const PlayUsual = () => {
+        commonMusic.play();
+    }
+
+    const stopUsual = () => {
+        commonMusic.pause();
+    }
+
+    const PlayTing = () => {
+        ting.play();
+    }
+
+    return { PlayGameOver, PlayUsual, PlayTing, stopUsual };
+})();
+
+
 // module to display the characters.
 const Display = (() => {
     const selectSign = (btn) => {
@@ -148,6 +174,8 @@ const gameControl = (() => {
 
     const start = (e) => {
         isStart = true;
+        
+        Music.PlayUsual();
 
         if (btnSelect){
             choiceBtn.forEach(btn => {
@@ -172,7 +200,8 @@ const gameControl = (() => {
 
     const printOnScreen = (e) => {
         if(isStart && !e.target.hasChildNodes()){
-
+            
+            Music.PlayTing();
             if(activePlayer.innerHTML === "Your Turn"){
                 Display.printValue(you.Sign(), e.target);
                 Display.displayTurn(`${Bot.Name()}'s Turn`);
@@ -186,6 +215,9 @@ const gameControl = (() => {
             draw = checkDraw();
             
             if(gameOver.winGame && draw === false){
+                Music.stopUsual();
+                Music.PlayGameOver();
+
                 Display.displayTurn("Game Over");
 
                 if(gameOver.winner === you.Sign()){
@@ -200,6 +232,8 @@ const gameControl = (() => {
             }
 
             if(draw) {
+                Music.stopUsual();
+                Music.PlayGameOver();
                 Display.displayTurn("Its a draw");
                 Display.Message("Game Over");
                 removeEvent()
@@ -216,7 +250,7 @@ const gameControl = (() => {
 
 
 const RunGame = () => {
-    
+
     choiceBtn.forEach(btn => { 
         btn.addEventListener("click", gameControl.getSign);
     })
